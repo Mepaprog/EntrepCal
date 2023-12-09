@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Entrepeneur</title>
+  <style>
+    th>input,#opexrows{width:50px;}
+    td>input{width: 90%;}
+    .type{padding: 0;}
+    #column{width: 35px;margin: 0px 10px 10px 0px;}
+    .perc>th>input{width:40px;}
+    .copyright{margin-left: 10px;}
+    .bolder{font-weight: bolder;}
+    table,th,td{
+      border: 1px solid;
+      border-collapse: collapse;
+      padding: 5px;
+      text-align: center;
+    }
+    .calbttn{
+      width:100px;
+      height: 30px;
+      position: sticky;
+      top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TABLE 1</h1>
+  <label>Table Rows: </label>
+  <input type="number" id="column" value="2">
+  <button style="transform:translate(-8px,0);" onclick="changerow()">apply</button>
+  <br>
+  <button onclick="calculatet1()" class="calbttn">CALCULATE</button><br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Type of RTW's</th>
+        <th>Cost per Unit (A)
+          <hr>(A)
+        </th>
+        <th>Mark-up <input type="number" id="t1mu" value="50">% (B)
+        <hr>(B) = (A x %)
+      </th>
+        <th>Selling price (C)
+          <hr>(C) = (A+B)
+        </th>
+        <th>Projected Volume (D)
+          <hr>Average No. of Items Sold (Daily)
+          <hr>(D)
+        </th>
+        <th>Projected Revenue (E)
+          <hr>(Daily)
+          <hr>(E) = (C x D)
+        </th>
+      </tr>
+    </thead>
+    <tbody id="tb1">
+      <!-- TABLE 1 -->
+    </tbody>
+  </table>
+  <h1>TABLE 2</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Type of RTW's</th>
+        <th>Selling Price 
+          <hr>(C) = (A + B)
+        </th>
+        <th>Projected Volume
+          <hr>Average No. of Items Sold (Monthly)
+          <hr>F = (D x 30 days)
+        </th>
+        <th>Projected Revenue
+          <hr>(Monthly)
+          <hr>G = (C x F)
+        </th>
+        <th>Projected Volume
+          <hr>Average No. of Items Sold (Yearly)
+          <hr>H = (D x 365 days)
+        </th>
+        <th>Projected Revenue
+          <hr>(Yearly)
+          <hr>I = (C x H)
+        </th>
+      </tr>
+    </thead>
+    <tbody id="tb2">
+      <!-- Table 2 -->
+    </tbody>
+  </table>
+  <h1>TABLE 3</h1>
+  <table>
+    <thead>
+      <tr class="perc">
+        <th>Month</th>
+        <th>January</th>
+        <th>February <input type="number" id="feb" value="5">%</th>
+        <th>March <input type="number" id="mar" value="5">%</th>
+        <th>April <input type="number" id="apr" value="5">%</th>
+        <th>May <input type="number" id="may" value="5">%</th>
+        <th>June <input type="number" id="jun" value="10">%</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Revenue</td>
+        <td id="rjan"></td>
+        <td id="rfeb"></td>
+        <td id="rmar"></td>
+        <td id="rapr"></td>
+        <td id="rmay"></td>
+        <td id="rjun"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <table>
+    <thead>
+      <tr class="perc">
+        <th>Month</th>
+        <th>July <input type="number" id="jul" value="5">%</th>
+        <th>August <input type="number" id="aug" value="0">%</th>
+        <th>September <input type="number" id="sep" value="-5">%</th>
+        <th>October <input type="number" id="oct" value="-5">%</th>
+        <th>November <input type="number" id="nov" value="5">%</th>
+        <th>December <input type="number" id="dec" value="10">%</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Revenue</td>
+        <td id="rjul"></td>
+        <td id="raug"></td>
+        <td id="rsep"></td>
+        <td id="roct"></td>
+        <td id="rnov"></td>
+        <td id="rdec"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h1>TABLE 4</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Type of RTW's</th>
+        <th>Cost per Unit
+          <hr>(A)
+        </th>
+        <th>Projected Volume
+          <hr>Average No. of Items Sold (Monthly)
+          <hr>F = (D x 30 days)
+        </th>
+        <th>Projected Costs of Purchases (Monthly)
+          <hr>K = (A x F)
+        </th>
+      </tr>
+    </thead>
+    <tbody id="tb4">
+      <!-- Table 4 -->
+    </tbody>
+  </table>
+  <h1>TABLE 5</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Type of RTW's</th>
+        <th>No. of Items Sold (Daily)
+          <hr>(D)
+        </th>
+        <th>Projected Volume
+          <hr>Average No. of Items Purchased (Monthly)
+          <hr>F = (D x 30 days)
+        </th>
+        <th>Freight in ( <input type="text" style="width: 85px;" placeholder="January Only"> )
+          <hr>J = (F / <input type="number" id="fj1" style="margin:5px;">) x <input type="number" id="fj2">
+        </th>
+      </tr>
+    </thead>
+    <tbody id="tb5">
+      <!-- Table 5 -->
+    </tbody>
+  </table>
+  <!-- analysis -->
+  <br><br>
+  <table>
+    <tbody id="analysis">
+      <tr>
+        <td>Merchandise Inventory, beginning</td>
+        <td><input type="number" value="0" id="invbeg" style="text-align: center;"></td>
+      </tr>
+      <tr>
+        <td>Add: Net Cost of Purchases</td>
+        <td id="ncp"></td>
+      </tr>
+      <tr>
+        <td>Freight-in</td>
+        <td><u id="fi"></u></td>
+      </tr>
+      <tr>
+        <td>Cost of Goods Available for sale</td>
+        <td id="cogafs"></td>
+      </tr>
+      <tr>
+        <td>Less: Merchandise Inventory, end</td>
+        <td><input type="number" value="0" id="invend" style="text-align: center;"></td>
+      </tr>
+      <tr>
+        <td class="bolder">Cost of Goods Sold</td>
+        <td id="cogs" class="bolder"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <label for="opexrows">Operating Expenses Rows: </label>
+  <input type="number" id="opexrows" value="3">
+  <button onclick="changeOpexRows()">apply</button>
+  <br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Operating Expenses</th>
+      </tr>
+    </thead>
+    <tbody id="opex">
+      <!-- Operating Expenses -->
+    </tbody>
+  </table>
+  <br><br>
+  <table>
+    <tbody>
+      <tr>
+        <td>Cost of Goods Sold</td>
+        <td id="costsold"></td>
+      </tr>
+      <tr>
+        <td>Total Operating Expenses</td>
+        <td id="operatingex"></td>
+      </tr>
+      <tr>
+        <td class="bolder">Cost</td>
+        <td id="fincost" class="bolder"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h1>TABLE 6</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>January</th>
+        <th>February</th>
+        <th>March</th>
+        <th>April</th>
+        <th>May</th>
+        <th>June</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Increases</td>
+        <th></th>
+        <th><input type="number" id="feb6" value="5">%</th>
+        <th><input type="number" id="mar6" value="5">%</th>
+        <th><input type="number" id="apr6" value="5">%</th>
+        <th><input type="number" id="may6" value="5">%</th>
+        <th><input type="number" id="jun6" value="10">%</th>
+      </tr>
+      <tr>
+        <td>Cost of Goods Sold</td>
+        <td id="cjan"></td>
+        <td id="cfeb"></td>
+        <td id="cmar"></td>
+        <td id="capr"></td>
+        <td id="cmay"></td>
+        <td id="cjun"></td>
+      </tr>
+      <tr>
+        <td>Increases</td>
+        <th></th>
+        <th><input type="number" id="feb7" value="2">%</th>
+        <th><input type="number" id="mar7" value="2">%</th>
+        <th><input type="number" id="apr7" value="2">%</th>
+        <th><input type="number" id="may7" value="2">%</th>
+        <th><input type="number" id="jun7" value="2">%</th>
+      </tr>
+      <tr>
+        <td>Expenses</td>
+        <td id="ejan"></td>
+        <td id="efeb"></td>
+        <td id="emar"></td>
+        <td id="eapr"></td>
+        <td id="emay"></td>
+        <td id="ejun"></td>
+      </tr>
+      <tr class="bolder">
+        <td>Total Cost & Expenses</td>
+        <td id="tjan"></td>
+        <td id="tfeb"></td>
+        <td id="tmar"></td>
+        <td id="tapr"></td>
+        <td id="tmay"></td>
+        <td id="tjun"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>July</th>
+        <th>August</th>
+        <th>September</th>
+        <th>October</th>
+        <th>November</th>
+        <th>December</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Increases</th>
+        <th><input type="number" id="jul6" value="5">%</th>
+        <th><input type="number" id="aug6" value="0">%</th>
+        <th><input type="number" id="sep6" value="-5">%</th>
+        <th><input type="number" id="oct6" value="-5">%</th>
+        <th><input type="number" id="nov6" value="5">%</th>
+        <th><input type="number" id="dec6" value="10">%</th>
+      </tr>
+      <tr>
+        <td>Cost of Goods Sold</td>
+        <td id="cjul"></td>
+        <td id="caug"></td>
+        <td id="csep"></td>
+        <td id="coct"></td>
+        <td id="cnov"></td>
+        <td id="cdec"></td>
+      </tr>
+      <tr>
+        <th>Increases</th>
+        <th><input type="number" id="jul7" value="2">%</th>
+        <th><input type="number" id="aug7" value="2">%</th>
+        <th><input type="number" id="sep7" value="2">%</th>
+        <th><input type="number" id="oct7" value="2">%</th>
+        <th><input type="number" id="nov7" value="2">%</th>
+        <th><input type="number" id="dec7" value="2">%</th>
+      </tr>
+      <tr>
+        <td>Expenses</td>
+        <td id="ejul"></td>
+        <td id="eaug"></td>
+        <td id="esep"></td>
+        <td id="eoct"></td>
+        <td id="enov"></td>
+        <td id="edec"></td>
+      </tr>
+      <tr class="bolder">
+        <td>Total Cost & Expenses</td>
+        <td id="tjul"></td>
+        <td id="taug"></td>
+        <td id="tsep"></td>
+        <td id="toct"></td>
+        <td id="tnov"></td>
+        <td id="tdec"></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <br><br><br><br>
+  <font class="copyright">2023 © Program by <a href="https://www.facebook.com/profile.php?id=61551430809512">Meparanum, Charl</a></font>
+  <br><br>
+  <script>
+    let totalrows = 2;
+    let ExpensesTotalRows = document.getElementById('opexrows').value;;
+    function changerow(){
+      totalrows = document.getElementById('column').value;
+      document.getElementById('tb1').innerHTML='';
+      document.getElementById('tb2').innerHTML='';
+      document.getElementById('tb4').innerHTML='';
+      document.getElementById('tb5').innerHTML='';
+      createTable()
+    }
+    function createTable(){
+    //Table 1
+    for(let i=1;i<=totalrows;i++){
+      let container = document.getElementById('tb1');
+      let newtr = document.createElement('tr');
+      newtr.innerHTML = '<td class="type"><input type="text" id="rtw'+i+'" placeholder="Optional"></td><td><input type="number" id="a'+i+'"></td><td id="b'+i+'"></td> <td id="c'+i+'"></td><td><input type="number" id="d'+i+'"></td><td id="e'+i+'"></td>';
+      container.append(newtr);
+    }
+    let newtrtb1 = document.createElement('tr');
+    newtrtb1.setAttribute('class','bolder');
+    newtrtb1.innerHTML = '<td>Total</td><td id="t1a"></td><td id="t1b"></td><td id="t1c"></td><td id="t1d"></td><td id="t1e"></td>';
+    document.getElementById('tb1').append(newtrtb1);
+    //Table 2
+    for(let i=1;i<=totalrows;i++){
+      let container = document.getElementById('tb2');
+      let newtr = document.createElement('tr');
+      newtr.innerHTML = '<td id="c2rtw'+i+'"></td><td id="c2'+i+'"></td><td id="f'+i+'"></td><td id="g'+i+'"></td><td id="h'+i+'"></td><td id="i'+i+'"></td>';
+      container.append(newtr);
+    }
+    let newtrtb2 = document.createElement('tr');
+    newtrtb2.setAttribute('class','bolder');
+    newtrtb2.innerHTML = '<td>Total</td><td id="t2c"></td><td id="t2f"></td><td id="t2g"></td><td id="t2h"></td><td id="t2i"></td>';
+    document.getElementById('tb2').append(newtrtb2);
+    //Table 4
+    for(let i=1;i<=totalrows;i++){
+      let container = document.getElementById('tb4');
+      let newtr = document.createElement('tr');
+      newtr.innerHTML = '<td id="c4rtw'+i+'"></td><td id="t4a'+i+'"></td><td id="t4f'+i+'"></td><td id="t4k'+i+'"></td>';
+      container.append(newtr);
+    }
+    let newtrtb4 = document.createElement('tr');
+    newtrtb4.setAttribute('class','bolder');
+    newtrtb4.innerHTML = '<tr><td>Total</td><td id="t4ta"></td><td id="t4tf"></td><td id="t4tk"></td></tr>';
+    document.getElementById('tb4').append(newtrtb4);
+    //Table 5
+    for(let i=1;i<=totalrows;i++){
+      let container = document.getElementById('tb5');
+      let newtr = document.createElement('tr');
+      newtr.innerHTML = '<td id="c5rtw'+i+'"></td><td id="t5d'+i+'"></td><td id="t5f'+i+'"></td><td id="t5j'+i+'"></td>';
+      container.append(newtr);
+    }
+    let newtrtb5 = document.createElement('tr');
+    newtrtb5.setAttribute('class','bolder');
+    newtrtb5.innerHTML = '<td>Total</td><td id="t5td"></td><td id="t5tf"></td><td id="t5tj"></td>';
+    document.getElementById('tb5').append(newtrtb5);
+    // Operating Expenses
+      let opextable = document.getElementById('opex');
+      opextable.innerHTML = '';
+      for(let i=1;i<=ExpensesTotalRows;i++){
+        let newtrop = document.createElement('tr');
+        newtrop.innerHTML = '<tr><td><input type="text" placeholder="Exprenses (Optional)"></td><td><input type="number" id="expen'+i+'"></td></tr>';
+        opextable.append(newtrop);
+      }
+      let newtoxtr = document.createElement('tr');
+      newtoxtr.setAttribute('class','bolder');
+      newtoxtr.innerHTML = '<td>Total Operating Expenses</td><td id="tox"></td>';
+      opextable.append(newtoxtr);
+    }createTable();
+
+    function rtwtype(){
+      for(let i=1;i<=totalrows;i++){
+        let rtw = document.getElementById('rtw'+i).value;
+        document.getElementById('c2rtw'+i).innerHTML = rtw;
+        document.getElementById('c4rtw'+i).innerHTML = rtw;
+        document.getElementById('c5rtw'+i).innerHTML = rtw;
+      }
+    }
+    function calculatet1(){
+      rtwtype();
+      let table1markup = document.getElementById('t1mu').value;
+      let ta=0;let tb=0;let tc=0;let td=0;let te=0;
+      let sel = [0, 0, 0];
+      let acost = [];
+      for(let i=1;i<=totalrows;i++){
+        let a = document.getElementById('a'+i).value;
+        acost[i-1] = a;
+        document.getElementById('t4a'+i).innerHTML = a;
+        ta+=1*a;
+        let mu = document.getElementById('t1mu').value;
+        let b = document.getElementById('b'+i); 
+        let bcal = a*(mu*0.01);
+        tb+=1*bcal;
+        b.innerHTML = a+' x .'+mu+' = '+bcal;
+        let c = document.getElementById('c'+i);
+        let ccal = 1*a+1*bcal;
+        tc+=1*ccal;
+        c.innerHTML = a+' + '+bcal+' = '+ccal;
+        let d = document.getElementById('d'+i).value;
+        document.getElementById('t5d'+i).innerHTML = d;
+        td+=1*d;
+        let ecal = ccal * d;
+        sel[i-1] = ccal;
+        te+=1*ecal;
+        let e = document.getElementById('e'+i);
+        e.innerHTML = ccal+' x '+d+' = '+ecal;
+      }
+      document.getElementById('t1a').innerHTML = ta;
+      document.getElementById('t1b').innerHTML = tb;
+      document.getElementById('t1c').innerHTML = tc;
+      document.getElementById('t1d').innerHTML = td;
+      document.getElementById('t1e').innerHTML = te;
+
+      let tf=0;let tg=0;let th=0;let ti=0;
+      let seltotal = 0;
+      let fcalnum = [];
+      for(let i=1;i<=totalrows;i++){
+        document.getElementById('c2'+i).innerHTML = document.getElementById('c'+i).innerHTML;
+        seltotal+=sel[i-1];
+        let f = document.getElementById('f'+i);
+        let d = document.getElementById('d'+i).value;
+        let fcal = d*30;
+        document.getElementById('t4f'+i).innerHTML = d+' x 30 = '+fcal;
+        document.getElementById('t5f'+i).innerHTML = d+' x 30 = '+fcal;
+        fcalnum[i-1] = fcal;
+        tf+=fcal;
+        f.innerHTML = d+' x 30 = '+fcal;
+        let g = document.getElementById('g'+i);
+        let gcal = sel[i-1]*fcal;
+        tg+=gcal;
+        g.innerHTML = sel[i-1]+' x '+fcal+' = '+gcal;
+        let h = document.getElementById('h'+i);
+        let hcal = d*365;
+        th+=hcal;
+        h.innerHTML = d+' x 365 = '+hcal;
+        let ii = document.getElementById('i'+i);
+        let ical = sel[i-1]*hcal;
+        ti+=ical;
+        ii.innerHTML = sel[i-1]+' x '+hcal+' = '+ical;
+      }
+      document.getElementById('t2c').innerHTML = seltotal;
+      document.getElementById('t2f').innerHTML = tf;
+      document.getElementById('t2g').innerHTML = tg;
+      document.getElementById('t2h').innerHTML = th;
+      document.getElementById('t2i').innerHTML = ti;
+
+      let MonthList = 
+      ['feb','mar','apr','may','jun',
+      'jul','aug','sep','oct','nov','dec',];
+      document.getElementById('rjan').innerHTML = tg;
+      let lastmonthrev = tg;
+      for(let i=1;i<=MonthList.length;i++){
+        let percent = document.getElementById(MonthList[i-1]).value;
+        let percal = (lastmonthrev * (percent*0.01))+lastmonthrev;
+        document.getElementById('r'+MonthList[i-1]).innerHTML = percal;
+        lastmonthrev = percal;
+      }
+      // Table 4
+      let t4tk = 0;
+      for(let i=1;i<=totalrows;i++){
+        let k = document.getElementById('t4k'+i);
+        let kcal = acost[i-1]*fcalnum[i-1];
+        k.innerHTML = acost[i-1]+' x '+fcalnum[i-1]+' = '+kcal;
+        t4tk += kcal;
+      }
+      document.getElementById('t4ta').innerHTML = ta;
+      document.getElementById('t4tf').innerHTML = tf;
+      document.getElementById('t4tk').innerHTML = t4tk;
+      document.getElementById('ncp').innerHTML = '&nbsp;&nbsp;'+t4tk;
+      // Table 5
+      document.getElementById('t5td').innerHTML = td;
+      document.getElementById('t5tf').innerHTML = tf;
+      let fjtotal = 0;
+      for(let i=1;i<=totalrows;i++){
+        let f = document.getElementById('t5j'+i);
+        let fj1 = document.getElementById('fj1').value;
+        let fj2 = document.getElementById('fj2').value;
+        let fjcal = (fcalnum[i-1]/fj1)*fj2;
+        f.innerHTML = fjcal;
+        fjtotal += fjcal;
+      }
+      document.getElementById('t5tj').innerHTML = fjtotal;
+      document.getElementById('fi').innerHTML = '+ '+fjtotal;
+      let invenbeg = document.getElementById('invbeg').value;
+      let invend = document.getElementById('invend').value;
+      let costgodaval = (1*invenbeg+1*t4tk+1*fjtotal);
+      document.getElementById('cogafs').innerHTML = '= '+costgodaval;
+      document.getElementById('cogs').innerHTML = '= '+(1*costgodaval-1*invend);
+      // Opex
+      let opextotal = 0;
+      for(let i=1;i<=document.getElementById('opexrows').value;i++){
+        let expens = document.getElementById('expen'+i);
+        opextotal += 1*expens.value;
+      }
+      document.getElementById('tox').innerHTML = opextotal;
+      document.getElementById('costsold').innerHTML = 1*costgodaval-1*invend;
+      document.getElementById('operatingex').innerHTML = opextotal;
+      document.getElementById('fincost').innerHTML = (1*costgodaval-1*invend)+(1*opextotal);
+      //Table 6
+      document.getElementById('cjan').innerHTML = 1*costgodaval-1*invend;
+      document.getElementById('ejan').innerHTML = opextotal;
+      document.getElementById('tjan').innerHTML = (1*costgodaval-1*invend)+(1*opextotal);
+      let lastmonthex = [1*costgodaval-1*invend,opextotal];
+      for(let i=1;i<=MonthList.length;i++){
+        let perc = document.getElementById(MonthList[i-1]+'6').value*0.01;
+        let cogcal = ((1*lastmonthex[0])*perc)+(1*lastmonthex[0]);
+        lastmonthex[0] = cogcal;
+        let perex = document.getElementById(MonthList[i-1]+'7').value*0.01;
+        let exns = (lastmonthex[1]*perex)+lastmonthex[1];
+        lastmonthex[1] = exns;
+        let tcecal = 1*cogcal+1*exns;
+        document.getElementById('c'+MonthList[i-1]).innerHTML = cogcal;
+        document.getElementById('e'+MonthList[i-1]).innerHTML = exns;
+        document.getElementById('t'+MonthList[i-1]).innerHTML = tcecal;
+      }
+    }
+    function changeOpexRows(){
+      ExpensesTotalRows = document.getElementById('opexrows').value;
+      let opextable = document.getElementById('opex');
+      opextable.innerHTML = '';
+      for(let i=1;i<=ExpensesTotalRows;i++){
+        let newtrop = document.createElement('tr');
+        newtrop.innerHTML = '<tr><td><input type="text" placeholder="Exprenses (Optional)"></td><td><input type="number" id="expen'+i+'"></td></tr>';
+        opextable.append(newtrop);
+      }
+      let newtoxtr = document.createElement('tr');
+      newtoxtr.setAttribute('class','bolder');
+      newtoxtr.innerHTML = '<td>Total Operating Expenses</td><td id="tox"></td>';
+      opextable.append(newtoxtr);
+    }
+
+  </script>
+</body>
+</html>
