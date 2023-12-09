@@ -16,21 +16,39 @@
       padding: 5px;
       text-align: center;
     }
+    .bttnholder{
+      display: flex;
+      justify-content: center;
+    }
     .calbttn{
-      width:100px;
-      height: 30px;
+      width:200px;
+      height: 60px;
+      font-weight: bolder;
+      font-size: x-large;
+      font-family: Arial, Helvetica, sans-serif;
       position: sticky;
-      top: 10px;
+      bottom: 100px;
+      right: 0px;
+      box-shadow: 3px 3px 2px rgba(10,10,10,0.5);
+      border-radius: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .calbttn:hover{
+      background-color:lightgreen;
     }
   </style>
 </head>
 <body>
-  <h1>TABLE 1</h1>
-  <label>Table Rows: </label>
+  <div class="bttnholder">
+    <button onclick="calculatet1()" class="calbttn">CALCULATE</button>
+  </div>
+  <br>
+  <label>Type of RTW's Count: </label>
   <input type="number" id="column" value="2">
   <button style="transform:translate(-8px,0);" onclick="changerow()">apply</button>
   <br>
-  <button onclick="calculatet1()" class="calbttn">CALCULATE</button><br><br>
+  <h1>TABLE 1</h1>
   <table>
     <thead>
       <tr>
@@ -211,7 +229,7 @@
     </tbody>
   </table>
   <br><br>
-  <label for="opexrows">Operating Expenses Rows: </label>
+  <label for="opexrows">Operating Expenses Count: </label>
   <input type="number" id="opexrows" value="3">
   <button onclick="changeOpexRows()">apply</button>
   <br><br>
@@ -257,7 +275,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>Increases</td>
+        <th>Increases</th>
         <th></th>
         <th><input type="number" id="feb6" value="5">%</th>
         <th><input type="number" id="mar6" value="5">%</th>
@@ -275,7 +293,7 @@
         <td id="cjun"></td>
       </tr>
       <tr>
-        <td>Increases</td>
+        <th>Increases</th>
         <th></th>
         <th><input type="number" id="feb7" value="2">%</th>
         <th><input type="number" id="mar7" value="2">%</th>
